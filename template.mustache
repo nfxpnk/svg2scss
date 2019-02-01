@@ -1,0 +1,39 @@
+// Icons
+//
+// Markup:
+{{#svgs}}
+// <div class="kss-icon-item"><span><img src="images/{{{fileName}}}"></span>${{{name}}}<br>{{{width}}} * {{{height}}}</div>
+{{/svgs}}
+// <style type="text/css">
+// .kss-icon-item {display: inline-block; vertical-align: top; padding: 0 0 15px; width: 24%; text-align: center;}
+// .kss-icon-item span {display: block; margin: 0 0 5px;}
+// .kss-icon-item img {width: 64px; height: auto; background: #cccccc; vertical-align: top;}
+// </style>
+//
+// Styleguide 1
+{{#svgs}}
+${{{name}}}: ('{{{inline}}}', {{width}}, {{height}});
+{{/svgs}}
+
+@function create-svg($name, $fill-color) {
+    $path: nth($name, 1);
+    $w: nth($name, 2);
+    $h: nth($name, 3);
+
+    $fill-color: str-slice(inspect($fill-color), 2);
+    $fill-color: '%23' + $fill-color;
+    $icon: 'data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="#{$w}" height="#{$h}"%3E%3Cpath fill="#{$fill-color}" d="#{$path}"/%3E%3C/svg%3E%0A';
+    @return $icon;
+}
+
+@mixin inline-svg-mono($name, $fill-color: #000) {
+    $svg: create-svg($name, $fill-color);
+    background: transparent url($svg) no-repeat 50% 50%;
+    background-size: 100%;
+}
+
+@mixin inline-svg-multi($name) {
+    $svg: nth($name, 1);
+    background: transparent url($svg) no-repeat 50% 50%;
+    background-size: 100%;
+}

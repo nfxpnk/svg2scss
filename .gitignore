@@ -1,0 +1,5 @@
+node_modules/
+_svg.scss
+svg-optimized/*.svg
+config.json
+config.file
