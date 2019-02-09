@@ -1,4 +1,4 @@
-# fret2svg
+# svg2scss
 Creating inline svg variables from svg files
 
 ## Example
